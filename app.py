@@ -34,7 +34,7 @@ Base.metadata.create_all(bind=BANCO_ALUNO)
 system("cls || clear")
 
 #Create - Insert - Salvar.
-def salvarAluno():
+def salvar_aluno():
     print("Solicitando dados para o aluno.")
 
     inserir_nome = input("Digite seu nome: ")
@@ -47,20 +47,21 @@ def salvarAluno():
     session.commit()
 
 #Read - Select - Consultar.
-def consultarAluno():
+def consultar_aluno():
     print("\nExibindo dados de todos os alunos.")
     lista_alunos = session.query(Aluno).all()
 
     for aluno in lista_alunos:
         print(
-            f"\n{aluno.id}"
+            f"\n{aluno.ra}"
             f"\n{aluno.nome}"
+            f"\n{aluno.sobrenome}"
             f"\n{aluno.email}"
             f"\n{aluno.senha}"
             )
 
 #Update - Update - Atualizar
-def atualizarAluno():
+def atualizar_aluno():
     print("\nAtualizando dados do aluno.")
     email_aluno = input("Digite o e-mail do aluno que será atualizado: ")
 
@@ -68,26 +69,28 @@ def atualizarAluno():
 
     if aluno:
         aluno.nome = input("Digite seu nome: ")
+        aluno.sobrenome = input("Digite seu sobrenome: ")
         aluno.email = input("Digite seu e-mail: ")
         aluno.senha = input("Digite sua senha: ")
 
         session.commit()
     else:
-        print("aluno não encontrado.")
+        print("Aluno não encontrado.")
 
     print("\nExibindo dados de todos os alunos.")
     lista_alunos = session.query(Aluno).all()
 
     for aluno in lista_alunos:
         print(
-            f"\n{aluno.id}"
+            f"\n{aluno.ra}"
             f"\n{aluno.nome}"
+            f"\n{aluno.sobrenome}"
             f"\n{aluno.email}"
             f"\n{aluno.senha}"
             )
     
 #Delete - DELETE - Excluir
-def excluirAluno():
+def excluir_aluno():
     print("\nExcluindo os dados de um aluno.")
     email_aluno = input("Digite o e-mail do aluno que será excluído: ")
 
@@ -96,37 +99,40 @@ def excluirAluno():
     if aluno:
         session.delete(aluno)
         session.commit()
-        print(f"aluno {aluno.nome} excluído com sucesso!")
+        print(f"Aluno {aluno.nome} excluído com sucesso!")
 
     else:
-        print("aluno não encontrado.")
+        print("Aluno não encontrado.")
 
     print("\nExibindo dados de todos os alunos.")
     lista_alunos = session.query(Aluno).all()
 
     for aluno in lista_alunos:
         print(
-            f"\n{aluno.id}"
+            f"\n{aluno.ra}"
             f"\n{aluno.nome}"
+            f"\n{aluno.sobrenome}"
             f"\n{aluno.email}"
             f"\n{aluno.senha}"
             )
-    
-print("Consultando dados de apenas um aluno.")
-email_aluno = input("Digite o e-mail do aluno: ")
+def consultar_unico_aluno():    
+    print("\nConsultando dados de apenas um aluno.")
+    email_aluno = input("Digite o e-mail do aluno: ")
 
-aluno = session.query(Aluno).filter_by(email = email_aluno).first()
+    aluno = session.query(Aluno).filter_by(email = email_aluno).first()
 
-if aluno:
-    print(
-    f"\n{aluno.id}"
-    f"\n{aluno.nome}"
-    f"\n{aluno.email}"
-    f"\n{aluno.senha}"
-        )
+    if aluno:
+        print(
+        f"\n{aluno.ra}"
+        f"\n{aluno.nome}"
+        f"\n{aluno.sobrenome}"
+        f"\n{aluno.email}"
+        f"\n{aluno.senha}"
+            )
 
-else:
-    print("aluno não encontrado.")
+    else:
+        print("Aluno não encontrado.")
+
 
 #Encerrando sessão.
 session.close()
