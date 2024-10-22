@@ -134,5 +134,37 @@ def consultar_unico_aluno():
         print("Aluno não encontrado.")
 
 
+while True:
+    print("\n///Código/// \t ///Descrição///")
+    print("1 \t Adicionar aluno.")
+    print("2 \t Consultar todos os alunos.")
+    print("3 \t Atualizar aluno.")
+    print("4 \t Excluir aluno.")
+    print("5 \t Consultar um único aluno.")
+    print("6 \t Exibir lista completa e sair.")
+    
+    resposta = int(input("Informe o código desejado: "))
+    system("cls || clear")
+    
+    match(resposta):
+        case 1:
+            salvar_aluno()
+        case 2:
+            consultar_aluno()
+        case 3:
+            consultar_aluno()
+            atualizar_aluno()
+        case 4:
+            consultar_aluno()
+            excluir_aluno()
+        case 5:
+            consultar_unico_aluno()
+        case 6:
+            consultar_aluno()
+            break
+        case _:
+            print("Código inválido, tente novamente.")
+
+
 #Encerrando sessão.
 session.close()
